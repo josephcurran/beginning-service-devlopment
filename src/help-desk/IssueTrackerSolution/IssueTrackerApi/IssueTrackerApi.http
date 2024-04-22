@@ -5,6 +5,12 @@ Accept: application/json
 
 ###
 
+
+GET {{IssueTrackerApi_HostAddress}}/issues?software=Notepad
+Accept: application/json
+
+###
+
 POST {{IssueTrackerApi_HostAddress}}/issues
 Content-Type: application/json
 
@@ -12,3 +18,8 @@ Content-Type: application/json
   "software": "Powerpoint",
   "description": "How do I make them less boring?"
 }
+
+###
+
+GET {{IssueTrackerApi_HostAddress}}/issues/2cee9c32-a7ef-4e12-9ca5-36173dc3d4ea
+Accept: application/json
