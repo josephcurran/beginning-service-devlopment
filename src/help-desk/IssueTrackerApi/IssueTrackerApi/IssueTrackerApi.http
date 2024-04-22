@@ -1,6 +1,14 @@
 @IssueTrackerApi_HostAddress = http://localhost:5275
 
-GET {{IssueTrackerApi_HostAddress}}/weatherforecast/
+GET {{IssueTrackerApi_HostAddress}}/issues/
 Accept: application/json
 
 ###
+
+POST {{IssueTrackerApi_HostAddress}}/issues
+Content-Type: application/json
+
+{
+  "software": "powerpointer",
+  "description": "I want clippy back"
+}
