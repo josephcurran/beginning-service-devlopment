@@ -21,6 +21,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers(); // Use .NET Reflection to go find all the routes to create the route table.
-Console.WriteLine("About to run the application");
+
 app.Run(); // This is a "blocking" message pump.
-Console.WriteLine("Done running the application");
+
