@@ -24,13 +24,27 @@ Operands:
 
 If you did it right, you'll get back something like:
 
+Also include who to contact if it is an urgent matter.
+
+
 ```json
 {
     "id": "some-unique-id",
     "software": "Excel",
     "description": "Broke!",
     "createdOn": "2024-timestamp....",
-    "status": "Created"
+    "status": "Created",
+    "support": {
+        "name": "Joe",
+        "email": "joe@company.com",
+        "phone": "555-1212"
+    }
 }
 
 ```
+
+"During business hours (when we are open) it is always Joe."
+"We are going to move to a system where that job is rotated amongst people"
+"Outside of business hours, it is our contracted company, Support Pros, and you should give them that email and phone number"
+
+Cohesion ("Temporal Cohesion")
