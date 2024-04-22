@@ -2,10 +2,4 @@
 
 ## My Notes
 
-
 ## Links and Stuff
- 
-
- To pull down my code, use `git pull`
-
- 
