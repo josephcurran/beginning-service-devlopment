@@ -1,17 +1,34 @@
 ﻿using FluentValidation;
+using Marten;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IssueTrackerApi.Controllers.Issues;
 
-public class Api : ControllerBase
+public class Api(IDocumentSession session) : ControllerBase
 {
 
     // GET /issues
     [HttpGet("/issues")]
     public async Task<ActionResult> GetTheIssuesAsync()
     {
-        var issues = new List<object>();
+        var issues = await session.Query<Issue>().ToListAsync();
         return Ok(issues);
+    }
+
+    [HttpGet("/issues/{id:guid}")]
+    public async Task<ActionResult> GetIssueByIdAsync(Guid id)
+    {
+        var issue = await session.Query<Issue>().SingleOrDefaultAsync(i => i.Id == id);
+
+        if (issue is null)
+        {
+            return NotFound();
+
+        }
+        else
+        {
+            return Ok(issue);
+        }
     }
 
     [HttpPost("/issues")]
@@ -31,6 +48,8 @@ public class Api : ControllerBase
                 Status = IssueStatus.Created
             };
             // do our thing.
+            session.Store(response);
+            await session.SaveChangesAsync();
             return Ok(response);
         }
         else

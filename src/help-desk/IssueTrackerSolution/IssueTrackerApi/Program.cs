@@ -1,10 +1,17 @@
 using FluentValidation;
 using IssueTrackerApi.Controllers.Issues;
+using Marten;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var databaseConnectionString = builder.Configuration.GetConnectionString("data") ?? throw new Exception("No Connection String");
+Console.WriteLine("using the connection string " + databaseConnectionString);
+builder.Services.AddMarten(options =>
+{
+    options.Connection(databaseConnectionString);
+}).UseLightweightSessions();
 
 builder.Services.AddValidatorsFromAssemblyContaining<CreateIssueRequestModelValidator>();
 builder.Services.AddControllers().AddJsonOptions(options =>
