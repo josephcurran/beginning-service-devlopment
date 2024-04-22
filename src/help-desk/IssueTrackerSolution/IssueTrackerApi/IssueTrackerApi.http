@@ -9,6 +9,6 @@ POST {{IssueTrackerApi_HostAddress}}/issues
 Content-Type: application/json
 
 {
-  "software": "notepad",
-  "description": "Keeps crashing and I suck at games"
+  "software": "Word",
+  "description": "I want Clippy Back!"
 }

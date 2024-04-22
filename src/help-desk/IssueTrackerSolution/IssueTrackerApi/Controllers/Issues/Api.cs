@@ -22,8 +22,16 @@ public class Api : ControllerBase
         var results = await validator.ValidateAsync(request);
         if (results.IsValid)
         {
+            var response = new Issue
+            {
+                CreatedAt = DateTimeOffset.UtcNow,
+                Description = request.Description,
+                Software = request.Software,
+                Id = Guid.NewGuid(),
+                Status = IssueStatus.Created
+            };
             // do our thing.
-            return Ok(request);
+            return Ok(response);
         }
         else
         {
@@ -46,6 +54,17 @@ public record CreateIssueRequestModel
     public string Description { get; set; } = string.Empty;
 }
 
+
+public record Issue
+{
+    public Guid Id { get; set; }
+    public string Description { get; set; } = string.Empty;
+    public string Software { get; set; } = string.Empty;
+    public DateTimeOffset CreatedAt { get; set; }
+    public IssueStatus Status { get; set; }
+
+}
+public enum IssueStatus { Created }
 
 public class CreateIssueRequestModelValidator : AbstractValidator<CreateIssueRequestModel>
 {

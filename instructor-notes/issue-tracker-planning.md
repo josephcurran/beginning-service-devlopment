@@ -21,3 +21,16 @@ Operands:
     "description": "I want clippy back!"
 }
 ```
+
+If you did it right, you'll get back something like:
+
+```json
+{
+    "id": "some-unique-id",
+    "software": "Excel",
+    "description": "Broke!",
+    "createdOn": "2024-timestamp....",
+    "status": "Created"
+}
+
+```
