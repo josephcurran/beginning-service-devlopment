@@ -7,3 +7,17 @@ can create them.
 
 
 
+## Adding Issues
+
+Operation: "Add an Issue"
+Operands:
+    - Software?
+    - Description of the problem
+    - Who is creating this issue? -- Who is almost always from the Authorization header in the request.
+
+```json
+{
+    "software": "Excel",
+    "description": "I want clippy back!"
+}
+```

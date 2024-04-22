@@ -4,3 +4,11 @@ GET {{IssueTrackerApi_HostAddress}}/issues
 Accept: application/json
 
 ###
+
+POST {{IssueTrackerApi_HostAddress}}/issues
+Content-Type: application/json
+
+{
+  "software": "notepad",
+  "description": "Keeps crashing and I suck at games"
+}
