@@ -1,3 +1,6 @@
+using HelpDeskSupportApi.Services;
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IProvideTheBusinessClock, StandardBusinessClock>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -14,9 +18,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/", () => Results.Ok(new SupportResponseModel("Bob Smith", "555-1212", "bob@company.com")));
+app.MapGet("/", async ([FromServices] IProvideTheBusinessClock clock) =>
+{
+    var ifWeAreOpen = await clock.AreWeCurrentOpenAsync();
+    if (ifWeAreOpen)
+    {
+        return Results.Ok(new SupportResponseModel("Bob Smith", "555-1212", "bob@company.com"));
+    }
+    else
+    {
+        return Results.Ok(new SupportResponseModel("Support Pros", "(800) BAD-CODE", "help@support-pros.com"));
+    }
+});
 
 app.Run();
+
 
 public record SupportResponseModel(string Name, string Phone, string Email);
 
