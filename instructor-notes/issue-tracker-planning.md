@@ -34,11 +34,7 @@ Also include who to contact if it is an urgent matter.
     "description": "Broke!",
     "createdOn": "2024-timestamp....",
     "status": "Created",
-    "support": {
-        "name": "Joe",
-        "email": "joe@company.com",
-        "phone": "555-1212"
-    }
+    "support": "http://localhost:1337/issues/3739797393/support"
 }
 
 ```

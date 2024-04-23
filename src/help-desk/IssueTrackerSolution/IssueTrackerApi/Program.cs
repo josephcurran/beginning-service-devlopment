@@ -1,5 +1,7 @@
 using FluentValidation;
+using IssueTrackerApi;
 using IssueTrackerApi.Controllers.Issues;
+using IssueTrackerApi.Services;
 using Marten;
 using System.Text.Json.Serialization;
 
@@ -21,6 +23,13 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var apiUrl = builder.Configuration.GetValue<string>("api-url") ?? throw new Exception("Need the Support Api Url");
+builder.Services.AddHttpClient<SupportHttpClient>(client =>
+{
+    client.BaseAddress = new Uri(apiUrl);
+}).AddPolicyHandler(BasicSrePolicies.GetDefaultRetryPolicy())
+.AddPolicyHandler(BasicSrePolicies.GetDefaultCircuitBreaker());
 
 // the stuff above this line - configuration of the api and all the stuff inside of it.
 var app = builder.Build();
