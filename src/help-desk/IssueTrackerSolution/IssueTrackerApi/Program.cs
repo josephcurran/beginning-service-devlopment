@@ -13,7 +13,7 @@ builder.Services.AddMarten(options =>
     options.Connection(databaseConnectionString);
 }).UseLightweightSessions();
 
-builder.Services.AddValidatorsFromAssemblyContaining<CreateIssueRequestModelValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateIssueRequestModelValidator>(); // we were this from FluentValidation.AspNetCore but they moved it to FluentValidation.DependencyInjectionExtensions
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());

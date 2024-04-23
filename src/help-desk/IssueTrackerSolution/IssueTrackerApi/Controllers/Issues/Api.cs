@@ -91,6 +91,7 @@ public record Issue
     public IssueStatus Status { get; set; }
 
 }
+
 public enum IssueStatus { Created }
 
 public class CreateIssueRequestModelValidator : AbstractValidator<CreateIssueRequestModel>
