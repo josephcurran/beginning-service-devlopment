@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(sp => TimeProvider.System); // if anything needs a time provider, use the real system clock.
-builder.Services.AddScoped<IProvideTheBusinessClock, StandardBusinessClock>();
+builder.Services.AddScoped<IProvideTheBusinessClock, HolidaysBusinessClock>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
