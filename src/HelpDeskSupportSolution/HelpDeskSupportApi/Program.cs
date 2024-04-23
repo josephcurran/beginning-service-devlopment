@@ -14,7 +14,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapGet("/", () => Results.Ok(new SupportResponseModel("Bob Smith", "555-1212", "bob@company.com")));
 
 app.Run();
 
 public record SupportResponseModel(string Name, string Phone, string Email);
+
+public partial class Program { }

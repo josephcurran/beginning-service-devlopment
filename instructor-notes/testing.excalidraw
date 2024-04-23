@@ -1,0 +1,48 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "id": "yEfAKYMpkHc147MxYBlNz",
+      "type": "text",
+      "x": 473,
+      "y": 273,
+      "width": 445.0797119140625,
+      "height": 200,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1284167,
+      "version": 167,
+      "versionNonce": 801189097,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1713889135886,
+      "link": null,
+      "locked": false,
+      "text": "Unit Tests\n    - Cannot (should not) touch:\n       - networks\n        - databases (that's a network, duh)\n        - the file system\n        - users \n\n    - \"Unit of Functionality\"",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 193,
+      "containerId": null,
+      "originalText": "Unit Tests\n    - Cannot (should not) touch:\n       - networks\n        - databases (that's a network, duh)\n        - the file system\n        - users \n\n    - \"Unit of Functionality\"",
+      "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
