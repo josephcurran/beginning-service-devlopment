@@ -1,1 +1,1 @@
-create database Issues
+create database issues
