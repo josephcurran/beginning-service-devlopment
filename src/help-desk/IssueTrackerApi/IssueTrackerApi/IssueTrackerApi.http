@@ -9,6 +9,6 @@ POST {{IssueTrackerApi_HostAddress}}/issues
 Content-Type: application/json
 
 {
-  "software": "powerpointer",
+  "software": "word",
   "description": "I want clippy back"
 }

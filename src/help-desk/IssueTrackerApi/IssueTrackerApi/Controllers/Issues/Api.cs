@@ -83,8 +83,11 @@ public record Issue
     public string Software { get; set; } = string.Empty;
     public DateTimeOffset CreatedAt { get; set; }
     public IssueStatus Status { get; set; }
+    public SupportInfo support { get; set; } = new("Bob Smith", "Bob@aol.com", "555-1212");
 
 }
+
+public record SupportInfo(string Name, string Email, string Phone);
 public enum IssueStatus { Created }
 
 public class CreateIssueRequestModelValidator : AbstractValidator<CreateIssueRequestModel>
