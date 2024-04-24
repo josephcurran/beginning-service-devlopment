@@ -1,7 +1,31 @@
 using HelpDeskSupportApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(b => b.AddService("issues-api"))
+    .WithTracing(b =>
+    {
+        b.AddAspNetCoreInstrumentation();
+        b.AddHttpClientInstrumentation();
+        b.AddZipkinExporter();
+        b.AddHttpClientInstrumentation();
+        b.AddConsoleExporter();
+        b.SetSampler(new AlwaysOnSampler());
+    })
+    .WithMetrics(opts =>
+    {
+        opts.AddPrometheusExporter();
+        opts.AddHttpClientInstrumentation();
+        opts.AddRuntimeInstrumentation();
+
+        opts.AddAspNetCoreInstrumentation();
+    });
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -30,7 +54,7 @@ app.MapGet("/", async ([FromServices] IProvideTheBusinessClock clock) =>
         return Results.Ok(new SupportResponseModel("Support Pros", "(800) BAD-CODE", "help@support-pros.com"));
     }
 });
-
+app.MapPrometheusScrapingEndpoint();
 app.Run();
 
 

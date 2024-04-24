@@ -4,8 +4,33 @@ using IssueTrackerApi.Controllers.Issues;
 using IssueTrackerApi.Services;
 using Marten;
 using System.Text.Json.Serialization;
+using Npgsql;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(b => b.AddService("issues-api"))
+    .WithTracing(b =>
+    {
+        b.AddAspNetCoreInstrumentation();
+        b.AddHttpClientInstrumentation();
+        b.AddZipkinExporter();
+        b.AddHttpClientInstrumentation();
+        b.AddConsoleExporter();
+        b.AddNpgsql();
+        b.SetSampler(new AlwaysOnSampler());
+    })
+    .WithMetrics(opts =>
+    {
+        opts.AddPrometheusExporter();
+        opts.AddHttpClientInstrumentation();
+        opts.AddRuntimeInstrumentation();
+
+        opts.AddAspNetCoreInstrumentation();
+    });
 
 // Add services to the container.
 var databaseConnectionString = builder.Configuration.GetConnectionString("data") ?? throw new Exception("No Connection String");
@@ -44,6 +69,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers(); // Use .NET Reflection to go find all the routes to create the route table.
-
+app.MapPrometheusScrapingEndpoint();
 app.Run(); // This is a "blocking" message pump.
 
